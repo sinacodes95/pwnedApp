@@ -61,10 +61,8 @@ class App extends Component {
     .then(res => res.json())
     .then(res => {
       const rows = res.split('\r\n');
-      console.log(rows)
       const found = rows.find(val => val.split(':')[0] === passwordHash.slice(5));
       if (found && found.split(':')[1] > 0) {
-        console.log(found.split(':')[1])
         this.setState({passwordOutput: found.split(':')[1]})
       }
     })
@@ -82,7 +80,6 @@ class App extends Component {
       const paddedValue = (padding + hexValue).slice(-padding.length)
       result.push(paddedValue);
     }
-    console.log(result.join(''))
     return result.join('');
   }
 
@@ -102,18 +99,9 @@ class App extends Component {
           
 
           <Jumbotron>
-            {isEmailActive?
-            <InputFields title="Enter Email" subTitle="Enter an email or a list of comma separated emails" onChange={this.emailInput} onClick={this.getBreachedEmails}/>
-            :
-            <div>
-              <h1> Enter Password </h1>
-              <form className="form">
-                <label value="Password"></label>
-                <input onChange={this.passwordInput} className="input" placeholder="Password"></input>
-                <Button onClick={this.getBreachedPassword} bsStyle ="primary" bsSize="large">Search</Button>
-              </form>
-            </div>
-            }
+            {isEmailActive
+            ?<InputFields title="Enter Email" subTitle="Enter an email or a list of comma separated emails" onChange={this.emailInput} onClick={this.getBreachedEmails}/>
+            :<InputFields title="Enter Password" subTitle="Enter password below" onChange={this.passwordInput} onClick={this.getBreachedPassword}/>}
             <h1>{passwordOutput}</h1>
           </Jumbotron>
 
@@ -142,6 +130,13 @@ class App extends Component {
               )
             }):
             <h1>Results: </h1>}
+          </div>
+
+          <div>
+            {isPasswordActive&&passwordOutput.length
+            ?<h1>Your Password was found in {passwordOutput} breaches!!!!!</h1>
+            :<h1>No Breaches Found</h1>
+            }
           </div>
 
 
