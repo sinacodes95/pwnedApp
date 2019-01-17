@@ -13,7 +13,7 @@ class App extends Component {
         emailOutput: [],
 
         passwordInput: '',
-        passwordOutput: [],
+        passwordOutput: '',
         isPasswordActive: false
     }
   }
@@ -46,11 +46,45 @@ class App extends Component {
   }
 
   emailInput = (event) => {
-    this.setState({emailInput: event.target.value})
+    this.setState({emailInput: event.target.value});
   }
 
 
+  passwordInput = (event) => {
+    this.setState({passwordInput: event.target.value});
+  }
 
+  getBreachedPassword = async () => {
+    let password = this.state.passwordInput;
+    const passwordHash = (await this.sha1Generator(password)).toUpperCase();
+    fetch(`http://localhost:4000/api/password/${passwordHash.slice(0,5)}`)
+    .then(res => res.json())
+    .then(res => {
+      const rows = res.split('\r\n');
+      console.log(rows)
+      const found = rows.find(val => val.split(':')[0] === passwordHash.slice(5));
+      if (found && found.split(':')[1] > 0) {
+        console.log(found.split(':')[1])
+        this.setState({passwordOutput: found.split(':')[1]})
+      }
+    })
+    .catch(err => console.log(err));
+  }
+
+  sha1Generator = async (passwordString) => {
+    const result = [];
+    const buffer = new TextEncoder().encode(passwordString);
+    const hashBuffer = await crypto.subtle.digest('SHA-1', buffer)
+    const bytes = new DataView(hashBuffer)
+    for (let i=0;i<bytes.byteLength;i+=4) {
+      const hexValue = bytes.getUint32(i).toString(16);
+      const padding = '00000000';
+      const paddedValue = (padding + hexValue).slice(-padding.length)
+      result.push(paddedValue);
+    }
+    console.log(result.join(''))
+    return result.join('');
+  }
 
   activePasswordToggle = () => {
     this.setState({ isEmailActive: false, isPasswordActive: true});
@@ -58,7 +92,7 @@ class App extends Component {
   }
   
   render() {
-    let { isEmailActive, isPasswordActive, emailOutput } = this.state;
+    let { isEmailActive, isPasswordActive, emailOutput, passwordOutput } = this.state;
     return (
       <div className="App">
         <Header />
@@ -75,11 +109,12 @@ class App extends Component {
               <h1> Enter Password </h1>
               <form className="form">
                 <label value="Password"></label>
-                <input className="input" placeholder="Password"></input>
-                <Button onClick="" bsStyle ="primary" bsSize="large">Search</Button>
+                <input onChange={this.passwordInput} className="input" placeholder="Password"></input>
+                <Button onClick={this.getBreachedPassword} bsStyle ="primary" bsSize="large">Search</Button>
               </form>
             </div>
             }
+            <h1>{passwordOutput}</h1>
           </Jumbotron>
 
 
