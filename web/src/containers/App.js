@@ -83,15 +83,34 @@ class App extends Component {
           </Jumbotron>
 
 
-          {isEmailActive&&emailOutput.length?emailOutput.map((v, i) => {
-            console.log(Object.keys(v))
-            return <p key={i}>{JSON.stringify(v)}</p>
-          }):
-          <h1>Got nothin</h1>}
+          <div>
+            {isEmailActive&&emailOutput.length?emailOutput.map((v, i) => {
+              return (
+                <div key={i}>
+                  <h1>Results: </h1>
+                  <h2>{v.email}</h2>
+                  {
+                    v.Breaches.map((v, i) => {
+                      return (
+                        <div key={i} className="resultCard">
+                          <p>PwnCount: {v.PwnCount}</p>
+                          <p>Name: {v.Name}</p>
+                          <p>Title: {v.Title}</p>
+                          <p>Domain: {v.Domain}</p>
+                          <p>BreachDate: {v.BreachDate}</p>
+                        </div>
+                      )
+                    })
+                  }
+                  
+                </div>
+              )
+            }):
+            <h1>Results: </h1>}
+          </div>
+
+
         </div>
-
-
-
       </div>
     );
   }
