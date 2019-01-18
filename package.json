@@ -1,0 +1,24 @@
+{
+  "name": "pwnedapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server": "cd api && npm install && npm start",
+    "client": "cd web && npm install && npm start",
+    "start": "concurrently --kill-others \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sinacodes95/pwnedApp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sinacodes95/pwnedApp/issues"
+  },
+  "homepage": "https://github.com/sinacodes95/pwnedApp#readme",
+  "dependencies": {
+    "concurrently": "^4.1.0"
+  }
+}
