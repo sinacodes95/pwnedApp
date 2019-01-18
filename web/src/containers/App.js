@@ -11,10 +11,12 @@ class App extends Component {
         isEmailActive: true,
         emailInput: '',
         emailOutput: [],
+        emailFound: true,
 
         passwordInput: '',
         passwordOutput: '',
-        isPasswordActive: false
+        isPasswordActive: false,
+        passwordFound: true
     }
   }
 
@@ -36,7 +38,11 @@ class App extends Component {
             return res;
           })
           .then(res => this.setState({ emailOutput: [...this.state.emailOutput, res] }))
-          .catch(err => console.log(err))
+          .catch(err => {
+            if (err) {
+              this.setState({emailFound: false});              
+            }
+          })
       }
     });
   }
@@ -49,6 +55,10 @@ class App extends Component {
     this.setState({emailInput: event.target.value});
   }
 
+  okFound = () => {
+    this.setState({emailFound: true});
+    this.setState({passwordFound: true});
+  }
 
   passwordInput = (event) => {
     this.setState({passwordInput: event.target.value});
@@ -64,6 +74,9 @@ class App extends Component {
       const found = rows.find(val => val.split(':')[0] === passwordHash.slice(5));
       if (found && found.split(':')[1] > 0) {
         this.setState({passwordOutput: found.split(':')[1]})
+      }
+      else {
+        this.setState({passwordFound: false})
       }
     })
     .catch(err => console.log(err));
@@ -89,7 +102,7 @@ class App extends Component {
   }
   
   render() {
-    let { isEmailActive, isPasswordActive, emailOutput, passwordOutput } = this.state;
+    let { isEmailActive, isPasswordActive, emailOutput, passwordOutput, emailFound, passwordFound } = this.state;
     return (
       <div className="App">
         <Header />
@@ -97,11 +110,24 @@ class App extends Component {
           <Button onClick={this.activeEmailToggle} bsStyle={isEmailActive?'success':'info'} block bsSize="large">Email</Button>
           <Button onClick={this.activePasswordToggle} bsStyle={isPasswordActive?'success':'info'} block bsSize="large">Password</Button>
           
+          {!emailFound
+          ?<Jumbotron>
+            <h1>Email Not Found In Any Records...For Now!</h1>
+          <Button onClick={this.okFound} bsStyle="warning" bsSize="small">OK</Button>
+          </Jumbotron>
+          :<div></div>}
+
+          {!passwordFound
+          ?<Jumbotron>
+            <h1>Password Not Found In Any Records...For Now!</h1>
+          <Button onClick={this.okFound} bsStyle="warning" bsSize="small">OK</Button>            
+          </Jumbotron>
+          :<div></div>}
 
           <Jumbotron>
             {isEmailActive
             ?<InputFields title="Enter Email" subTitle="Enter an email or a list of comma separated emails" onChange={this.emailInput} onClick={this.getBreachedEmails}/>
-            :<InputFields title="Enter Password" subTitle="Enter password below" onChange={this.passwordInput} onClick={this.getBreachedPassword}/>}
+            :<InputFields title="Enter Password" subTitle="Enter password below" onChange={this.passwordInput} onClick={this.getBreachedPassword} inputType="password"/>}
             <h1>{passwordOutput}</h1>
           </Jumbotron>
 
@@ -129,14 +155,13 @@ class App extends Component {
                 </div>
               )
             }):
-            <h1>Results: </h1>}
+            <div></div>}
           </div>
 
           <div>
             {isPasswordActive&&passwordOutput.length
             ?<h1>Your Password was found in {passwordOutput} breaches!!!!!</h1>
-            :<h1>No Breaches Found</h1>
-            }
+            :<div></div>            }
           </div>
 
 

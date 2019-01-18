@@ -4,14 +4,14 @@ import './InputFields.css'
 
 
 const InputFields = (props) => {
-  let {title, subTitle, onChange, onClick} = props;
+  let {title, subTitle, onChange, onClick, inputType} = props;
   return (
     <div>
       <h1> {title} </h1>
       <p>{subTitle}</p>
       <form className="form">
         <label value="Email"></label>
-        <input onChange={onChange} className="input" placeholder="Email"></input>
+        <input onChange={onChange} className="input" placeholder="Email" type={inputType || ''}></input>
         <Button onClick={onClick} bsStyle ="primary" bsSize="large">Search</Button>
       </form>
     </div>
