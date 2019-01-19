@@ -109,9 +109,9 @@ class App extends Component {
       <BrowserRouter>
       <div>
         <NavBar />
-        <Route exact path='/' component={Home}></ Route>
-        <Route exact path='/Email' component={Email}></ Route>
-        <Route exact path='/Password' component={Password}></ Route>
+          <Route exact path='/' component={Home}></ Route>
+          <Route exact path='/Email' component={Email}></ Route>
+          <Route exact path='/Password' component={Password}></ Route>
       </div>
       </BrowserRouter>
       

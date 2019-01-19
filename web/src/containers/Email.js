@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './Email.css'
 
 class Email extends Component {
   constructor() {
@@ -13,7 +12,7 @@ class Email extends Component {
       <div className='container'>
         <div class="row">
           <div class="col s12 m6">
-            <div class="card light-blue darken-3">
+            <div class="card grey darken-1">
               <div class="card-content white-text">
                 <span class="card-title">Email</span>
                 <p>Enter your email address below to check if it was compromised in a data breach.</p>
