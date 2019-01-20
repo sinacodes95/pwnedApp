@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import crypto from 'crypto';
 
 class Password extends Component {
   constructor() {
@@ -73,15 +74,14 @@ class Password extends Component {
     this.setState({ passwordInput: event.target.value });
   }
 
-  getBreachedPassword = async () => {
+  getBreachedPassword = () => {
     this.setState({ passwordNotFound: '2', passwordOutput: '' })
     let password = this.state.passwordInput;
-    const passwordHash = (await this.sha1Generator(password)).toUpperCase();
+    const passwordHash = (this.sha1Generator(password)).toUpperCase();
     fetch(`http://localhost:4000/api/password/${passwordHash.slice(0, 5)}`)
       .then(res => res.json())
       .then(res => {
-        const rows = res.split('\r\n');
-        const found = rows.find(val => val.split(':')[0] === passwordHash.slice(5));
+        const found = this.findHash(passwordHash, res);
         if (found && found.split(':')[1] > 0) {
           this.setState({ passwordOutput: found.split(':')[1], passwordNotFound: '0' })
         }
@@ -96,16 +96,14 @@ class Password extends Component {
       });
   }
 
-  sha1Generator = async (passwordString) => {
-    const result = [];
-    const buffer = new TextEncoder().encode(passwordString);
-    const hashBuffer = await crypto.subtle.digest('SHA-1', buffer)
-    const bytes = new DataView(hashBuffer)
-    for (let i = 0; i < bytes.byteLength; i += 4) {
-      const hexValue = bytes.getUint32(i).toString(16);
-      result.push(hexValue);
-    }
-    return result.join('');
+  findHash = (passwordHash, hashes) => {
+    const rows = hashes.split('\r\n');
+    const found = rows.find(val => val.split(':')[0] === passwordHash.slice(5));
+    return found;
+  }
+
+  sha1Generator = (passwordString) => {
+    return crypto.createHash('sha1').update(passwordString, 'binary').digest('hex');
   }
 
   closeCard = () => {
