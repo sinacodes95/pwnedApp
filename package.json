@@ -6,7 +6,8 @@
   "scripts": {
     "server": "cd api && npm install && npm start",
     "client": "cd web && npm install && npm start",
-    "start": "concurrently --kill-others \"npm run server\" \"npm run client\""
+    "start": "concurrently --kill-others \"npm run server\" \"npm run client\"",
+    "test": "cd web && npm run test"
   },
   "repository": {
     "type": "git",

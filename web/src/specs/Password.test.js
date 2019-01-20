@@ -21,9 +21,15 @@ it('has a sha1Generator method', () => {
   expect(result).toBe('a94a8fe5ccb19ba61c4c0873d391e987982fbbd3') 
 })
 
-it('has a sha1Generator method', () => {
+it('sha1Generator method return a sha1 hash', () => {
   const resObj = "{\r\nfe5ccb19ba61c4c0873d391e987982fbbd3:1\r\nfe5ccb19ba61c4c0873d391e987982fbbd2:2\r\nfe5ccb19ba61c4c0873d391e987982fbbd4:3\r\nfe5ccb19ba61c4c0873d391e987982fbbd5:4\r\n}"
   const wrapper = shallow(<Password />);
   const result = wrapper.instance().findHash('a94a8fe5ccb19ba61c4c0873d391e987982fbbd3', resObj)
   expect(result).toEqual('fe5ccb19ba61c4c0873d391e987982fbbd3:1') 
 })
+
+it('state properties', () => {
+  const wrapper = shallow(<Password />);
+  wrapper.state();
+  expect(wrapper.state()).toEqual({"passwordInput": "", "passwordNotFound": "2", "passwordOutput": ""});
+});

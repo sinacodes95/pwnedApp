@@ -106,18 +106,21 @@ class Email extends Component {
     this.setState({ emailInput: event.target.value });
   }
 
+  splitEmails = (emailsStirngList) => {
+    emailsStirngList = emailsStirngList.replace(/\s/g, '')
+    return emailsStirngList.match(/,/g) ? emailsStirngList.split(',') : [emailsStirngList];
+  }
+
   getBreachedEmails = () => {
     this.setState({ emailOutput: [], emailNotFound: '' });
 
     let emails = this.state.emailInput;
-    emails = emails.replace(/\s/g, '')
-    emails = emails.match(/,/g) ? emails.split(',') : [emails];
+    emails = this.splitEmails(emails);
 
     emails.forEach(element => {
       if (emails.length) {
         fetch(`http://localhost:4000/api/email/${element}`)
           .then(res => {
-            console.log(res)
             return res
           })
           .then(res => res.json())
@@ -129,7 +132,6 @@ class Email extends Component {
           .then(res => this.setState({ emailOutput: [...this.state.emailOutput, res] }))
           .catch(err => {
             if (err) {
-              console.log(err)
               this.setState({ emailNotFound: `${this.state.emailNotFound},${element}` });
             }
           })
