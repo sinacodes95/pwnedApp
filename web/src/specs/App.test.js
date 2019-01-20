@@ -1,0 +1,19 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from '../containers/App';
+import Enzyme, {shallow} from 'enzyme';
+
+
+it('renders without crashing', () => {
+  const div = document.createElement('div');
+  ReactDOM.render(<App />, div);
+  ReactDOM.unmountComponentAtNode(div);
+});
+
+it('it shallow renders correctly', () => {
+  const wrapper = shallow(
+    <App />
+  );
+
+  expect(wrapper).toMatchSnapshot();
+});
