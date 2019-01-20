@@ -9,7 +9,10 @@ app.use('/api', routes);
 
 // error handler
 app.use((err, req, res, next) => {
-  res.status(500).send({error: err.message});
+  if (res.headersSent) {
+    return next(err);
+  }
+  res.status(500).json({err: err.message});
 });
 
 app.listen(4000, () => {
