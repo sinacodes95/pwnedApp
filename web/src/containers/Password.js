@@ -41,25 +41,25 @@ class Password extends Component {
           </div>
           {passwordOutput.length && passwordNotFound==='0' ?
               <div className="col s12 m6">
-                <div className="card blue-grey darken-1">
+                <div className="card red darken-1">
                   <div className="card-content white-text">
                     <span className="card-title">Oh! Nooo!</span>
                     <p>Your password was found in {passwordOutput} breaches! <i className="material-icons prefix">sentiment_very_dissatisfied</i></p>
                   </div>
                   <div className="card-action">
-                    <a href="#">close</a>
+                    <a onClick={this.closeCard} href="#">close</a>
                   </div>
                 </div>
               </div>
               :passwordNotFound==='1'?
               <div className="col s12 m6">
-                <div className="card blue-grey darken-1">
+                <div className="card teal accent-3">
                   <div className="card-content white-text">
                     <span className="card-title">Wohoo!</span>
                     <p>Your password was not found in any breaches! <i className="material-icons prefix">sentiment_very_satisfied</i></p>
                   </div>
                   <div className="card-action">
-                    <a href="#">close</a>
+                    <a onClick={this.closeCard} href="#">close</a>
                   </div>
                 </div>
               </div>
@@ -106,6 +106,10 @@ class Password extends Component {
       result.push(hexValue);
     }
     return result.join('');
+  }
+
+  closeCard = () => {
+    this.setState({ passwordNotFound: '2' })    
   }
 }
 

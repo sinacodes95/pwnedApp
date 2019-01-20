@@ -44,13 +44,13 @@ class Email extends Component {
           </div>
           <div className="col s12 m8">
             {
-              emailOutput.length?emailOutput.map((emailBreach, index) => {
+              emailOutput.length ? emailOutput.map((emailBreach, index) => {
                 return (
                   <div key={index} className='white-text'>
-                    <h3>{emailBreach.email}</h3>
+                    <h3>{emailBreach.email}<i className="material-icons prefix">do_not_disturb</i></h3>
                     <table>
                       <thead>
-                        <tr className='grey darken-1'>
+                        <tr className='red darken-1'>
                           <th>Name</th>
                           <th>Domain</th>
                           <th>Breach Date</th>
@@ -60,14 +60,14 @@ class Email extends Component {
                       {
                         emailBreach.Breaches.map((breach, index) => {
                           return (
-                          <tbody key={index}>
-                            <tr>
-                              <td>{breach.Name}</td>
-                              <td>{breach.Domain}</td>
-                              <td>{breach.BreachDate}</td>
-                              <td>{breach.PwnCount}</td>
-                            </tr>
-                          </tbody>
+                            <tbody key={index}>
+                              <tr>
+                                <td>{breach.Name}</td>
+                                <td>{breach.Domain}</td>
+                                <td>{breach.BreachDate}</td>
+                                <td>{breach.PwnCount}</td>
+                              </tr>
+                            </tbody>
                           );
                         })
                       }
@@ -76,15 +76,26 @@ class Email extends Component {
                 )
               })
               :null}
-              {emailNotFound.length?emailNotFound.split(',').map((email,index) => {
-                return (
-                  email.length>5?<div key={index} className='white-text'>
-                      <h5 className='grey darken-1'>Wohooo! no records found for:</h5>
-                      <p>{email}<i className="material-icons prefix">check_circle</i></p>
-                  </div>:null
-                );
-              })
-              :null}
+            {emailNotFound.length ?
+              <div className="col s12 m12">
+                <div className="card teal accent-3">
+                  <div className="card-content white-text">
+                    <span className="card-title">Wohoo! no records found for:</span>
+                    <i className="material-icons prefix">check_circle</i>
+                    {emailNotFound.split(',').map((email, index) => {
+                      return (
+                        email.length > 5 ? 
+                          <p key={index}>{email}</p>
+                        :null
+                      );
+                    })}
+                  </div>
+                  <div className="card-action">
+                    <a onClick={this.closeCard} href="#">close</a>
+                  </div>
+                </div>
+              </div>
+              : null}
           </div>
         </div>
       </div>
@@ -124,6 +135,10 @@ class Email extends Component {
           })
       }
     });
+  }
+
+  closeCard = () => {
+    this.setState({ emailNotFound: '' })
   }
 
 }
