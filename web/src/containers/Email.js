@@ -39,7 +39,7 @@ class Email extends Component {
                 </div>
               </div>
               <div className="card-action">
-                <a onClick={this.getBreachedEmails} href="#">search</a>
+                <button className='waves-effect waves-teal btn-flat' onClick={this.getBreachedEmails} type='link'>SEARCH<i className="material-icons right">send</i></button>
               </div>
             </div>
           </div>
@@ -94,7 +94,7 @@ class Email extends Component {
                     })}
                   </div>
                   <div className="card-action">
-                    <a onClick={this.closeCard} href="#">close</a>
+                    <button className='waves-effect waves-teal btn-flat teal' onClick={this.closeCard} type='link'>CLOSE CARD</button>
                   </div>
                 </div>
               </div>
@@ -119,6 +119,7 @@ class Email extends Component {
 
     let emails = this.state.emailInput;
     if (!emails.length) {
+      this.setState({isLoading: false})
       return;
     }
     emails = this.splitEmails(emails);

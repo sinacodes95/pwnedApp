@@ -31,14 +31,13 @@ class Password extends Component {
                       <div className="input-field col s11 m11">
                         <i className="material-icons prefix">confirmation_number</i>
                         <input onChange={this.passwordInput} id="password" type="password" className="validate"></input>
-                        <label htmlFor="password">Enter password</label>
                       </div>
                     </div>
                   </form>
                 </div>
               </div>
               <div className="card-action">
-                <a onClick={this.getBreachedPassword} href="#">search</a>
+                <button className='waves-effect waves-teal btn-flat' onClick={this.getBreachedPassword} type='link'>SEARCH<i className="material-icons right">send</i></button>
               </div>
             </div>
           </div>
@@ -53,7 +52,7 @@ class Password extends Component {
                     <p>Your password was found in {passwordOutput} breaches! <i className="material-icons prefix">sentiment_very_dissatisfied</i></p>
                   </div>
                   <div className="card-action">
-                    <a onClick={this.closeCard} href="#">close</a>
+                    <button className='waves-effect waves-teal btn-flat teal' onClick={this.closeCard} type='link'>CLOSE CARD</button>
                   </div>
                 </div>
               </div>
@@ -65,7 +64,7 @@ class Password extends Component {
                       <p>Your password was not found in any breaches! <i className="material-icons prefix">sentiment_very_satisfied</i></p>
                     </div>
                     <div className="card-action">
-                      <a onClick={this.closeCard} href="#">close</a>
+                      <button className='waves-effect waves-teal btn-flat teal' onClick={this.closeCard} type='link'>CLOSE CARD</button>
                     </div>
                   </div>
                 </div>
@@ -83,7 +82,7 @@ class Password extends Component {
     this.setState({ passwordNotFound: '2', passwordOutput: '', isLoading: true });
     let password = this.state.passwordInput;
     if (!password.length) {
-      this.setState({isLoading: false});
+      this.setState({ isLoading: false });
       return;
     }
     const passwordHash = (this.sha1Generator(password)).toUpperCase();
@@ -92,7 +91,8 @@ class Password extends Component {
       .then(res => {
         const found = this.findHash(passwordHash, res);
         if (found && found.split(':')[1] > 0) {
-          this.setState({ isLoading: false, passwordOutput: found.split(':')[1], passwordNotFound: '0' })
+          let result = found.split(':')[1].replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+          this.setState({ isLoading: false, passwordOutput: result, passwordNotFound: '0' })
         }
         else {
           this.setState({ isLoading: false, passwordNotFound: '1' })

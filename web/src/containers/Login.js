@@ -7,12 +7,14 @@ class Login extends Component {
       loginOrSignup: false,
       username: '',
       password: '',
-      isLoading: false
+      isLoading: false,
+      loggedIn: false,
+      comingSoon: false
     }
   }
 
   render() {
-    const { loginOrSignup, isLoading } = this.state;
+    const { isLoading, comingSoon } = this.state;
     return (
       <div className='row'>
         <div className='col s12 m4 offset-m4'>
@@ -23,12 +25,12 @@ class Login extends Component {
 
             <div className='card-content'>
               <div className='form-field'>
-                <input type='text' id='username'></input>
+                <input onChange={this.username}type='text' id='username'></input>
                 <label htmlFor='username'>Username</label>
               </div><br></br>
 
               <div className='form-field'>
-                <input type='text' id='password'></input>
+                <input onChange={this.password} type='password' id='password'></input>
                 <label htmlFor='password'>Password</label>
               </div><br></br>
 
@@ -42,7 +44,7 @@ class Login extends Component {
               </div><br></br>
 
               <div className='form-field'>
-                <button className='btn-large wave-effect waves-light' style={{ width: '100%' }}>Submit</button>
+                <button onClick={this.handleLogin} className='btn-large wave-effect waves-light' style={{ width: '100%' }}>Submit</button>
               </div>
 
               {isLoading?<div className="progress">
@@ -52,13 +54,37 @@ class Login extends Component {
             </div>
           </div>
         </div>
+        {comingSoon?
+          <div className='col s12 m4 offset-m4'>
+            <div className='card'>
+              <div className='card-action teal lighten-2 white-text'>
+                <p>Thank you for showing an interest in our product.</p>
+                <p>This feature is coming soon!</p>
+              </div>
+            </div>
+          </div>:null}
       </div>
     )
   };
 
+  username = (e) => {
+    this.setState({username: e.target.value})
+  }
+
+  password = (e) => {
+    this.setState({password: e.target.value})
+  }
+
   loginOrSignupToggle = () => {
     this.setState({ loginOrSignup: !this.state.loginOrSignup })
   }
+
+  handleLogin = (e) => {
+    e.preventDefault();
+    this.setState({comingSoon: true});
+    
+  };
+
 }
 
 export default Login;

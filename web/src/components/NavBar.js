@@ -5,7 +5,7 @@ const NavBar = () => {
   return (
     <nav className='nav-wrapper'>
       <div className='container'>
-      <a className='brand-logo left'>';-- Have i Been Pwned?</a>
+      <h5 className='brand-logo left'>';-- Have i Been Pwned?</h5>
       <ul className='right'>
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/Email'>Email</NavLink></li>
