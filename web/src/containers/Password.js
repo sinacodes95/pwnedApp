@@ -7,12 +7,14 @@ class Password extends Component {
     this.state = {
       passwordInput: '',
       passwordOutput: '',
-      passwordNotFound: '2'
+      passwordNotFound: '2',
+      isLoading: false
+
     }
   }
 
   render() {
-    const { passwordOutput, passwordNotFound } = this.state;
+    const { passwordOutput, passwordNotFound, isLoading } = this.state;
     return (
       <div className='container'>
         <div className="row">
@@ -40,7 +42,10 @@ class Password extends Component {
               </div>
             </div>
           </div>
-          {passwordOutput.length && passwordNotFound==='0' ?
+          {isLoading ? <div className="progress">
+            <div className="indeterminate"></div>
+          </div> :
+            passwordOutput.length && passwordNotFound === '0' ?
               <div className="col s12 m6">
                 <div className="card red darken-1">
                   <div className="card-content white-text">
@@ -52,19 +57,19 @@ class Password extends Component {
                   </div>
                 </div>
               </div>
-              :passwordNotFound==='1'?
-              <div className="col s12 m6">
-                <div className="card teal accent-3">
-                  <div className="card-content white-text">
-                    <span className="card-title">Wohoo!</span>
-                    <p>Your password was not found in any breaches! <i className="material-icons prefix">sentiment_very_satisfied</i></p>
-                  </div>
-                  <div className="card-action">
-                    <a onClick={this.closeCard} href="#">close</a>
+              : passwordNotFound === '1' ?
+                <div className="col s12 m6">
+                  <div className="card teal accent-3">
+                    <div className="card-content white-text">
+                      <span className="card-title">Wohoo!</span>
+                      <p>Your password was not found in any breaches! <i className="material-icons prefix">sentiment_very_satisfied</i></p>
+                    </div>
+                    <div className="card-action">
+                      <a onClick={this.closeCard} href="#">close</a>
+                    </div>
                   </div>
                 </div>
-              </div>
-            :null}
+                : null}
         </div>
       </div>
     );
@@ -75,9 +80,10 @@ class Password extends Component {
   }
 
   getBreachedPassword = () => {
-    this.setState({ passwordNotFound: '2', passwordOutput: '' })
+    this.setState({ passwordNotFound: '2', passwordOutput: '', isLoading: true });
     let password = this.state.passwordInput;
     if (!password.length) {
+      this.setState({isLoading: false});
       return;
     }
     const passwordHash = (this.sha1Generator(password)).toUpperCase();
@@ -86,15 +92,15 @@ class Password extends Component {
       .then(res => {
         const found = this.findHash(passwordHash, res);
         if (found && found.split(':')[1] > 0) {
-          this.setState({ passwordOutput: found.split(':')[1], passwordNotFound: '0' })
+          this.setState({ isLoading: false, passwordOutput: found.split(':')[1], passwordNotFound: '0' })
         }
         else {
-          this.setState({ passwordNotFound: '1' })
+          this.setState({ isLoading: false, passwordNotFound: '1' })
         }
       })
       .catch(err => {
         if (err) {
-          this.setState({ passwordNotFound: '1' })
+          this.setState({ isLoading: false, passwordNotFound: '1' })
         }
       });
   }
@@ -110,7 +116,7 @@ class Password extends Component {
   }
 
   closeCard = () => {
-    this.setState({ passwordNotFound: '2' })    
+    this.setState({ passwordNotFound: '2' })
   }
 }
 

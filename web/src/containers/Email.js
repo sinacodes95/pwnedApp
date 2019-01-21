@@ -7,13 +7,14 @@ class Email extends Component {
 
       emailInput: '',
       emailOutput: [],
-      emailNotFound: ''
+      emailNotFound: '',
+      isLoading: false
 
     }
   }
 
   render() {
-    const { emailOutput, emailNotFound } = this.state;
+    const { emailOutput, emailNotFound, isLoading } = this.state;
     return (
       <div className='container'>
         <div className="row">
@@ -44,7 +45,9 @@ class Email extends Component {
           </div>
           <div className="col s12 m8">
             {
-              emailOutput.length ? emailOutput.map((emailBreach, index) => {
+              isLoading ? <div className="progress">
+                <div className="indeterminate"></div>
+              </div> : emailOutput.length ? emailOutput.map((emailBreach, index) => {
                 return (
                   <div key={index} className='white-text'>
                     <h3>{emailBreach.email}<i className="material-icons prefix">do_not_disturb</i></h3>
@@ -75,7 +78,7 @@ class Email extends Component {
                   </div>
                 )
               })
-              :null}
+                  : null}
             {emailNotFound.length ?
               <div className="col s12 m12">
                 <div className="card teal accent-3">
@@ -84,9 +87,9 @@ class Email extends Component {
                     <i className="material-icons prefix">check_circle</i>
                     {emailNotFound.split(',').map((email, index) => {
                       return (
-                        email.length > 5 ? 
+                        email.length > 5 ?
                           <p key={index}>{email}</p>
-                        :null
+                          : null
                       );
                     })}
                   </div>
@@ -112,7 +115,7 @@ class Email extends Component {
   }
 
   getBreachedEmails = () => {
-    this.setState({ emailOutput: [], emailNotFound: '' });
+    this.setState({ isLoading: true, emailOutput: [], emailNotFound: '' });
 
     let emails = this.state.emailInput;
     if (!emails.length) {
@@ -132,10 +135,10 @@ class Email extends Component {
             res['email'] = element;
             return res;
           })
-          .then(res => this.setState({ emailOutput: [...this.state.emailOutput, res] }))
+          .then(res => this.setState({ isLoading: false, emailOutput: [...this.state.emailOutput, res] }))
           .catch(err => {
             if (err) {
-              this.setState({ emailNotFound: `${this.state.emailNotFound},${element}` });
+              this.setState({ isLoading: false, emailNotFound: `${this.state.emailNotFound},${element}` });
             }
           })
       }

@@ -4,12 +4,15 @@ class Login extends Component {
   constructor() {
     super();
     this.state = {
-      loginOrSignup: false
+      loginOrSignup: false,
+      username: '',
+      password: '',
+      isLoading: false
     }
   }
 
   render() {
-    const { loginOrSignup } = this.state;
+    const { loginOrSignup, isLoading } = this.state;
     return (
       <div className='row'>
         <div className='col s12 m4 offset-m4'>
@@ -42,6 +45,10 @@ class Login extends Component {
                 <button className='btn-large wave-effect waves-light' style={{ width: '100%' }}>Submit</button>
               </div>
 
+              {isLoading?<div className="progress">
+                <div className="indeterminate"></div>
+              </div>:null}
+
             </div>
           </div>
         </div>
@@ -49,7 +56,7 @@ class Login extends Component {
     )
   };
 
-  loginOrSignupToggle = (event) => {
+  loginOrSignupToggle = () => {
     this.setState({ loginOrSignup: !this.state.loginOrSignup })
   }
 }
