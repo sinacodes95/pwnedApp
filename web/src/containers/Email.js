@@ -115,6 +115,9 @@ class Email extends Component {
     this.setState({ emailOutput: [], emailNotFound: '' });
 
     let emails = this.state.emailInput;
+    if (!emails.length) {
+      return;
+    }
     emails = this.splitEmails(emails);
 
     emails.forEach(element => {

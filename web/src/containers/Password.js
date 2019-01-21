@@ -77,6 +77,9 @@ class Password extends Component {
   getBreachedPassword = () => {
     this.setState({ passwordNotFound: '2', passwordOutput: '' })
     let password = this.state.passwordInput;
+    if (!password.length) {
+      return;
+    }
     const passwordHash = (this.sha1Generator(password)).toUpperCase();
     fetch(`http://localhost:4000/api/password/${passwordHash.slice(0, 5)}`)
       .then(res => res.json())
