@@ -9,6 +9,12 @@ PwnedApp uses the haveibeenpwned.com API that allows user to check if their acco
 #### 3. run 'npm install' then 'npm start'
 #### The App should start running on http://localhost:3000
 
+## Alternatively:
+#### 1. Clone the repository
+#### 2. cd into the pwnedApp/api directory then run 'npm install' then 'npm start'
+#### 3. cd into the pwnedApp/web directory then run 'npm install' then 'npm start'
+#### The App should start running on http://localhost:3000
+
 ## How to run tests:
 #### 1. cd into the pwnedApp directory
 #### 2. run 'npm run test'
