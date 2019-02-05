@@ -1,13 +1,13 @@
 {
-  "main.css": "/static/css/main.e09edfb7.chunk.css",
-  "main.js": "/static/js/main.16ce2201.chunk.js",
-  "main.js.map": "/static/js/main.16ce2201.chunk.js.map",
-  "static/js/1.0b200f12.chunk.js": "/static/js/1.0b200f12.chunk.js",
-  "static/js/1.0b200f12.chunk.js.map": "/static/js/1.0b200f12.chunk.js.map",
-  "runtime~main.js": "/static/js/runtime~main.229c360f.js",
-  "runtime~main.js.map": "/static/js/runtime~main.229c360f.js.map",
-  "static/css/main.e09edfb7.chunk.css.map": "/static/css/main.e09edfb7.chunk.css.map",
-  "index.html": "/index.html",
-  "precache-manifest.e5ae0a0ea5122253d51e4106fa59445a.js": "/precache-manifest.e5ae0a0ea5122253d51e4106fa59445a.js",
-  "service-worker.js": "/service-worker.js"
+  "main.css": "/HIBP/static/css/main.e09edfb7.chunk.css",
+  "main.js": "/HIBP/static/js/main.fa12197f.chunk.js",
+  "main.js.map": "/HIBP/static/js/main.fa12197f.chunk.js.map",
+  "static/js/1.0b200f12.chunk.js": "/HIBP/static/js/1.0b200f12.chunk.js",
+  "static/js/1.0b200f12.chunk.js.map": "/HIBP/static/js/1.0b200f12.chunk.js.map",
+  "runtime~main.js": "/HIBP/static/js/runtime~main.0b46cded.js",
+  "runtime~main.js.map": "/HIBP/static/js/runtime~main.0b46cded.js.map",
+  "static/css/main.e09edfb7.chunk.css.map": "/HIBP/static/css/main.e09edfb7.chunk.css.map",
+  "index.html": "/HIBP/index.html",
+  "precache-manifest.96613987311e7f4495556048064395a7.js": "/HIBP/precache-manifest.96613987311e7f4495556048064395a7.js",
+  "service-worker.js": "/HIBP/service-worker.js"
 }
