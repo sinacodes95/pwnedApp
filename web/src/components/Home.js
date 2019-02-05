@@ -12,7 +12,7 @@ const Home = () => {
               <p>Click below to check if you have an account that has been compromised in a data breach at any point. We will show you what we find.</p>
             </div>
             <div className="card-action">
-              <NavLink to="/Email">click Here</NavLink>
+              <NavLink to="pwnedApp/Email">click Here</NavLink>
             </div>
           </div>
         </div>
@@ -24,7 +24,7 @@ const Home = () => {
               <p>Pwned Passwords are 551,509,767 real world passwords previously exposed in data breaches. Click below to see if your Password was one of them.</p>
             </div>
             <div className="card-action">
-              <NavLink to="/Password">click here</NavLink>
+              <NavLink to="pwnedApp/Password">click here</NavLink>
             </div>
           </div>
         </div>
