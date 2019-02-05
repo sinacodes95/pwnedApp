@@ -1,13 +1,13 @@
 {
-  "main.css": "/HIBP/static/css/main.e09edfb7.chunk.css",
-  "main.js": "/HIBP/static/js/main.fa12197f.chunk.js",
-  "main.js.map": "/HIBP/static/js/main.fa12197f.chunk.js.map",
-  "static/js/1.0b200f12.chunk.js": "/HIBP/static/js/1.0b200f12.chunk.js",
-  "static/js/1.0b200f12.chunk.js.map": "/HIBP/static/js/1.0b200f12.chunk.js.map",
-  "runtime~main.js": "/HIBP/static/js/runtime~main.0b46cded.js",
-  "runtime~main.js.map": "/HIBP/static/js/runtime~main.0b46cded.js.map",
-  "static/css/main.e09edfb7.chunk.css.map": "/HIBP/static/css/main.e09edfb7.chunk.css.map",
-  "index.html": "/HIBP/index.html",
-  "precache-manifest.96613987311e7f4495556048064395a7.js": "/HIBP/precache-manifest.96613987311e7f4495556048064395a7.js",
-  "service-worker.js": "/HIBP/service-worker.js"
+  "main.css": "/pwnedApp/static/css/main.e09edfb7.chunk.css",
+  "main.js": "/pwnedApp/static/js/main.aca6985d.chunk.js",
+  "main.js.map": "/pwnedApp/static/js/main.aca6985d.chunk.js.map",
+  "static/js/1.0b200f12.chunk.js": "/pwnedApp/static/js/1.0b200f12.chunk.js",
+  "static/js/1.0b200f12.chunk.js.map": "/pwnedApp/static/js/1.0b200f12.chunk.js.map",
+  "runtime~main.js": "/pwnedApp/static/js/runtime~main.c92a5730.js",
+  "runtime~main.js.map": "/pwnedApp/static/js/runtime~main.c92a5730.js.map",
+  "static/css/main.e09edfb7.chunk.css.map": "/pwnedApp/static/css/main.e09edfb7.chunk.css.map",
+  "index.html": "/pwnedApp/index.html",
+  "precache-manifest.3839077c69cf034b474e2efea5d568cd.js": "/pwnedApp/precache-manifest.3839077c69cf034b474e2efea5d568cd.js",
+  "service-worker.js": "/pwnedApp/service-worker.js"
 }
