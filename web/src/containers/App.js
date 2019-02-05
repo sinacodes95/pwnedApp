@@ -11,10 +11,10 @@ const App = () => {
     <BrowserRouter>
       <div>
         <NavBar />
-        <Route exact path='pwnedApp/' component={Home}></ Route>
-        <Route exact path='pwnedApp/Email' component={Email}></ Route>
-        <Route exact path='pwnedApp/Password' component={Password}></ Route>
-        <Route exact path='pwnedApp/Login' component={Login}></ Route>
+        <Route exact path='/pwnedApp/' component={Home}></ Route>
+        <Route exact path='/pwnedApp/Email' component={Email}></ Route>
+        <Route exact path='/pwnedApp/Password' component={Password}></ Route>
+        <Route exact path='/pwnedApp/Login' component={Login}></ Route>
       </div>
     </BrowserRouter>
   );
