@@ -126,7 +126,7 @@ class Email extends Component {
 
     emails.forEach(element => {
       if (emails.length) {
-        fetch(`http://localhost:4000/api/email/${element}`)
+        fetch(`https://intense-spire-63761.herokuapp.com/api/email/${element}`) // backend of this app is deployed on heroku
           .then(res => {
             return res
           })

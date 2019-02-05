@@ -86,7 +86,7 @@ class Password extends Component {
       return;
     }
     const passwordHash = (this.sha1Generator(password)).toUpperCase();
-    fetch(`http://localhost:4000/api/password/${passwordHash.slice(0, 5)}`)
+    fetch(`https://intense-spire-63761.herokuapp.com/api/password/${passwordHash.slice(0, 5)}`) // backend of this app is deployed on heroku
       .then(res => res.json())
       .then(res => {
         const found = this.findHash(passwordHash, res);
