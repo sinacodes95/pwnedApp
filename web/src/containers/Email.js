@@ -110,7 +110,7 @@ class Email extends Component {
   }
 
   splitEmails = (emailsStirngList) => {
-    emailsStirngList = emailsStirngList.replace(/\s/g, '')
+    emailsStirngList = emailsStirngList.replace(/\s/g, '');
     return emailsStirngList.match(/,/g) ? emailsStirngList.split(',') : [emailsStirngList];
   }
 
