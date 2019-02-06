@@ -11,7 +11,7 @@ const App = () => {
     <BrowserRouter>
       <div>
         <NavBar />
-        <Route exact path='/' component={Home}></ Route>
+        <Route exact path='/pwnedApp' component={Home}></ Route>
         <Route exact path='/Email' component={Email}></ Route>
         <Route exact path='/Password' component={Password}></ Route>
         <Route exact path='/Login' component={Login}></ Route>
