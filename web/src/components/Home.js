@@ -22,7 +22,7 @@ const Home = () => {
 
         <div className="col s6 m6">
           <div className="card">
-            <div>
+            <div class="card-image">
               <img src="https://s3-eu-west-1.amazonaws.com/sinacodes/img/passwordStockPhoto.jpg" alt="email"></img>
               <span className="card-title">Password</span>
             </div>
