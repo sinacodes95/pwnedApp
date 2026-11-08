@@ -1,25 +1,21 @@
 {
   "name": "pwnedapp",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "server": "cd api && npm install && npm start",
-    "client": "cd web && npm install && npm start",
-    "start": "concurrently --kill-others \"npm run server\" \"npm run client\"",
-    "test": "cd web && npm run test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sinacodes95/pwnedApp.git"
-  },
-  "author": "",
+  "private": true,
+  "description": "Check email addresses and passwords for known data breaches.",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/sinacodes95/pwnedApp/issues"
+  "workspaces": ["api", "web"],
+  "engines": {
+    "node": ">=22.12.0"
   },
-  "homepage": "https://github.com/sinacodes95/pwnedApp#readme",
-  "dependencies": {
-    "concurrently": "^4.1.0"
+  "scripts": {
+    "dev": "concurrently --kill-others --names api,web \"npm run dev -w api\" \"npm run dev -w web\"",
+    "build": "npm run build --workspaces",
+    "start": "npm run start -w api",
+    "typecheck": "npm run typecheck --workspaces",
+    "test": "npm run test --workspaces"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
   }
 }
